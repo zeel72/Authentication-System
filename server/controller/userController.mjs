@@ -2,7 +2,7 @@ import userModel from "../models/userModel.mjs";
  
 export const getUserdata = async (req, res) => {
     try{
-        const {userId} = req.body;
+        const userId = req.userId;
         const user = await userModel.findById(userId);
 
         if(!user){
@@ -12,6 +12,7 @@ export const getUserdata = async (req, res) => {
         res.json({
             success : true,
             userdata : {
+                id: user._id,
                 username : user.name,
                 email : user.email,
                 isAccountVerified : user.isAccountVerified
